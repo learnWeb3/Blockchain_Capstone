@@ -1,4 +1,4 @@
-pragma solidity ^0.5.0;
+pragma solidity ^0.5.5;
 
 import "openzeppelin-solidity/contracts/utils/Address.sol";
 import "openzeppelin-solidity/contracts/drafts/Counters.sol";
@@ -39,7 +39,7 @@ contract Ownable {
     return _owner == _caller;
   }
 
-  function getOwner() public view returns(address){
+  function getOwner() public view returns (address) {
     return _owner;
   }
 }
@@ -562,6 +562,16 @@ contract ERC721Metadata is ERC721Enumerable, usingOraclize {
     _registerInterface(_INTERFACE_ID_ERC721_METADATA);
   }
 
+  /// @notice A descriptive name for a collection of NFTs in this contract
+  function name() external view returns (string memory) {
+    return _name;
+  }
+
+  /// @notice An abbreviated name for NFTs in this contract
+  function symbol() external view returns (string memory) {
+    return _symbol;
+  }
+
   // TODO: create external getter functions for name, symbol, and baseTokenURI
 
   function tokenURI(uint256 tokenId) external view returns (string memory) {
@@ -584,7 +594,7 @@ contract ERC721Metadata is ERC721Enumerable, usingOraclize {
 //  TODO's: Create CustomERC721Token contract that inherits from the ERC721Metadata contract. You can name this contract as you please
 //  1) Pass in appropriate values for the inherited ERC721Metadata contract
 //      - make the base token uri: https://s3-us-west-2.amazonaws.com/udacity-blockchain/capstone/
-contract CustomERC721Token is ERC721Metadata {
+contract CustomERC721Token is ERC721, ERC721Metadata {
   constructor()
     public
     ERC721Metadata(

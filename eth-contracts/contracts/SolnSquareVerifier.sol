@@ -1,4 +1,4 @@
-pragma solidity >0.5.0;
+pragma solidity >0.5.5;
 pragma experimental ABIEncoderV2;
 
 import "./ERC721Mintable.sol";
@@ -44,8 +44,8 @@ contract SolnSquareVerifier is CustomERC721Token, Verifier {
   //  - make sure the solution is unique (has not been used before)
   //  - make sure you handle metadata as well as tokenSuplly
 
-  function mintToken(Proof calldata proof, uint256[2] calldata inputs)
-    external
+  function mintToken(Proof memory proof, uint256[2] memory inputs)
+    public
     isUniqSolution(proof, msg.sender)
   {
     bool check = verifyTx(proof, inputs);

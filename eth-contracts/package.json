@@ -1,0 +1,16 @@
+{
+  "name": "eth-contracts",
+  "version": "1.0.0",
+  "description": "",
+  "main": "truffle-config.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "truffle test",
+    "deploy-testnet": "truffle --network=rinkeby deploy",
+    "seed-testnet": "truffle --network=rinkeby exec seed/index.js"
+  },
+  "author": "",
+  "license": "ISC"
+}

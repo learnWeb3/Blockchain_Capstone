@@ -24,7 +24,7 @@ contract("Verifier", (accounts) => {
 
     it("should return false if proof is invalid", async function () {
       const check = await this.contract.verifyTx(proof.proof, [
-        "0x00000000000000000000000000000000000000000000000000000000000000010",
+        "0x0000000000000000000000000000000000000000000000000000000000000005",
         "0x0000000000000000000000000000000000000000000000000000000000000001",
       ]);
       assert.equal(check, false);
