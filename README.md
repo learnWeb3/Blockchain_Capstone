@@ -7,6 +7,16 @@ The capstone will build upon the knowledge you have gained in the course in orde
 [Rinkeby -contract address](https://rinkeby.etherscan.io/address/0x8D0A45C467DC1c7255b9Fcb759bE80c495617088)
 [Opensea collection](https://testnets.opensea.io/collection/real-token)
 
+# Environnemet variables
+
+In order to run the application you will need to create environnement files to refrences environnement variables and add the already deployed contract address to the supplychain contract abi.
+At root directory fire the following command:
+
+```bash
+# creating general environement file
+echo -e "MNEMONIC=<YOUR MNEMONIC> PROVIDER_URL=<YOUR PROVIDER URL>" >> .env
+```
+
 # Test contracts
 
 At root directory fire the following command:
