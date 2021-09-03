@@ -32,7 +32,7 @@ contract SolnSquareVerifier is CustomERC721Token, Verifier {
   }
 
   // TODO Create a function to add the solutions to the array and emit the event
-  function add(Proof memory proof, address caller) internal {
+  function add(Proof memory proof, address caller) public {
     bytes32 _proof = keccak256(abi.encode(proof));
     Solution memory _solution = Solution({ index: _proof, caller: caller });
     solutions.push(_solution);
@@ -50,8 +50,9 @@ contract SolnSquareVerifier is CustomERC721Token, Verifier {
   {
     bool check = verifyTx(proof, inputs);
     require(check, "proof must be valid");
-    add(proof, msg.sender);
+    this.add(proof, msg.sender);
     tokenId.increment();
     mint(msg.sender, tokenId.current());
   }
+
 }

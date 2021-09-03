@@ -15,11 +15,6 @@ contract("SolnSquareVerifier", (accounts) => {
     it("should deploy the related contract", async function () {
       contract = await SolnSquareVerifier.new({ from: account_one });
     });
-    it("should mint a token if proof is valid", async function () {
-      await contract.mintToken(proof.proof, proof.inputs);
-      const balance = await contract.balanceOf(account_one);
-      assert.equal(new BigNumber(balance).isEqualTo(new BigNumber(1)), true);
-    });
 
     it("should fail if proof is invalid", async function () {
       try {
@@ -30,6 +25,21 @@ contract("SolnSquareVerifier", (accounts) => {
         assert.fail();
       } catch (error) {
         assert.equal(error.reason, "proof must be valid");
+      }
+    });
+
+    it("should mint a token if proof is valid", async function () {
+      await contract.mintToken(proof.proof, proof.inputs);
+      const balance = await contract.balanceOf(account_one);
+      assert.equal(new BigNumber(balance).isEqualTo(new BigNumber(1)), true);
+    });
+
+    it("should fail if proof has been used", async function () {
+      try {
+        await contract.mintToken(proof.proof, proof.inputs);
+        assert.fail();
+      } catch (error) {
+        assert.equal(error.reason, "proof must be uniq");
       }
     });
   });
