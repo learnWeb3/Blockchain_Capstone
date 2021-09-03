@@ -3,5 +3,31 @@
 // Test verification with correct proof
 // - use the contents from proof.json generated from zokrates steps
 
-    
 // Test verification with incorrect proof
+
+var Verifier = artifacts.require("Verifier");
+const assert = require("assert");
+const proof = require("../../proof.json");
+
+contract("Verifier", (accounts) => {
+  const account_one = accounts[0];
+
+  describe("Test verification", function () {
+    beforeEach(async function () {
+      this.contract = await Verifier.new({ from: account_one });
+    });
+
+    it("should return true if proof is valid", async function () {
+      const check = await this.contract.verifyTx(proof.proof, proof.inputs);
+      assert.equal(check, true);
+    });
+
+    it("should return false if proof is invalid", async function () {
+      const check = await this.contract.verifyTx(proof.proof, [
+        "0x00000000000000000000000000000000000000000000000000000000000000010",
+        "0x0000000000000000000000000000000000000000000000000000000000000001",
+      ]);
+      assert.equal(check, false);
+    });
+  });
+});
